@@ -41,7 +41,8 @@ function clientCounter(n){
 
 function newDrawing(data){
 
-	points_other.push(createVector(data.x, data.y));
+	var d = data
+	points_other.push(d);
 }
 
 function mouseDragged(){
@@ -56,7 +57,9 @@ function mouseDragged(){
 
 		var data = {
 			x: mouseX,
-			y: mouseY
+			y: mouseY,
+			w: windowWidth,
+			h: windowHeight
 		}
 		socket.emit('mouse', data);
 	}
@@ -89,7 +92,7 @@ function draw() {
 
 	for(let i = 0; i < points_other.length; i++){
 		fill(200,0,0);
-		ellipse(points_other[i].x, points_other[i].y, 10, 10);
+		ellipse(points_other[i].x * (windowWidth/points_other[i].w), points_other[i].y * (windowHeight/points_other[i].h), 10, 10);
 	}
 
 }
